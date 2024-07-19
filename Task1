@@ -32,6 +32,16 @@ WHERE StudentID = 1;
 DELETE FROM Students
 WHERE StudentID = 2;
 SELECT * FROM Students;
+INSERT INTO Courses (CourseID, CourseName, CourseDescription, Credits)
+VALUES (7, 'Database Systems', 'Introduction to database design and SQL.', 4),
+VALUES (8, 'Operating Systems', 'Study of operating system principles.', 3),
+VALUES (9, 'Data Structures', 'Introduction to data structures and algorithms.', 4),
+VALUES (6, 'Software Engineering', 'Principles of software development and project management.', 3),
+INSERT INTO Enrollments (EnrollmentID, StudentID, CourseID, EnrollmentDate, Grade)
+VALUES (12, 1, 7, '2023-01-15', 'A'),
+VALUES (13, 2, 8, '2023-01-20', 'B'),
+VALUES (14, 3, 9, '2023-01-18', 'A'),
+VALUES (15, 4, 6, '2023-01-25', 'B'),
 SELECT S.StudentID, S.FirstName, S.LastName, C.CourseName
 FROM Students S
 JOIN Enrollments E ON S.StudentID = E.StudentID
@@ -46,3 +56,4 @@ SELECT S.StudentID, S.FirstName, S.LastName, C.CourseName, E.Grade
 FROM Students S
 JOIN Enrollments E ON S.StudentID = E.StudentID
 JOIN Courses C ON E.CourseID = C.CourseID;
+
