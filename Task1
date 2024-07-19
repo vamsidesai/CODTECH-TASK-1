@@ -1,0 +1,48 @@
+CREATE TABLE Students (
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DateOfBirth DATE,
+    Email VARCHAR(100),
+    PhoneNumber VARCHAR(15)
+);
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    CourseName VARCHAR(100),
+    CourseDescription TEXT,
+    Credits INT
+);
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY,
+    StudentID INT,
+    CourseID INT,
+    EnrollmentDate DATE,
+    Grade CHAR(2),
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+INSERT INTO Students (StudentID, FirstName, LastName, DateOfBirth, Email, PhoneNumber)
+VALUES (1, 'vamsi', 'krishna', '2004-01-25', 'vamsikrishna@gmail.com', '9129949550');
+VALUES (2, 'bala', 'krishna', '2007-05-12', 'balakrishna@gmail.com', '8309002797');
+VALUES (3, 'Akhila', 'Joshi', '2004-11-19', 'akhilajoshi@gmail.com', '9219089009');
+VALUES (4, 'chethan', 'Gajula', '2003-05-21', 'chethangajula@gmail.com','6302215753');
+UPDATE Students
+SET Email = 'vamsidesai@gmail.com'
+WHERE StudentID = 1;
+DELETE FROM Students
+WHERE StudentID = 2;
+SELECT * FROM Students;
+SELECT S.StudentID, S.FirstName, S.LastName, C.CourseName
+FROM Students S
+JOIN Enrollments E ON S.StudentID = E.StudentID
+JOIN Courses C ON E.CourseID = C.CourseID
+WHERE C.CourseName = 'Database Systems';
+SELECT C.CourseID, C.CourseName, C.Credits
+FROM Courses C
+JOIN Enrollments E ON C.CourseID = E.CourseID
+JOIN Students S ON E.StudentID = S.StudentID
+WHERE S.StudentID = 1;
+SELECT S.StudentID, S.FirstName, S.LastName, C.CourseName, E.Grade
+FROM Students S
+JOIN Enrollments E ON S.StudentID = E.StudentID
+JOIN Courses C ON E.CourseID = C.CourseID;
